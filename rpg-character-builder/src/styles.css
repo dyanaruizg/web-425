@@ -44,11 +44,9 @@ body {
   position: sticky;
   justify-content: space-between;
   background: #1F6DAD;
-  margin: auto;
   padding: 10px 20px;
   left: 0;
   top: 0;
-  width: 100%;
 }
 
 .navbar .menu-left {
@@ -78,7 +76,6 @@ body {
   list-style: none;
   background: #fff;
   padding: 10px 15px;
-  margin-right: 30px;
   border-radius: 25px;
   border: none;
 }
