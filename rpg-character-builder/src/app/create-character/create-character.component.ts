@@ -19,54 +19,52 @@ import { CommonModule } from '@angular/common';
         class="create-character-form"
         #createCharacterForm="ngForm"
         (ngSubmit)="createCharacter();">
-      <h1>Complete the form below to create a new character.</h1>
 
-        <fieldset>
-          <legend><strong>My Character</strong></legend>
+        <h1>My Character</h1>
+        <p>Complete the form below to create a new character.</p>
 
-          <label for="name"><strong>Name</strong></label>
-          <input
-            type="text"
-            id="name"
-            required
-            name="name"
-            placeholder="Enter character name..."
-            class="name-input"
-            [(ngModel)]="nameCharacter"
-            #name="ngModel">
-            <div
-              [hidden]="name.valid || (name.pristine && name.untouched)"
-              class="alert">
-              Name is required
-            </div>
+        <label for="name"><strong>Name</strong></label>
+        <input
+          type="text"
+          id="name"
+          required
+          name="name"
+          placeholder="Enter character name..."
+          class="name-input"
+          [(ngModel)]="nameCharacter"
+          #name="ngModel">
+          <div
+            [hidden]="name.valid || (name.pristine && name.untouched)"
+            class="alert">
+            Name is required
+          </div>
 
-          <label for="gender"><strong>Gender</strong></label>
-          <select
-            name="gender"
-            id="gender"
-            [(ngModel)]="selectedCharacterGender"
-            #gender="ngModel">
-            @for (gender of genders; track gender) {
-              <option value="{{ gender }}">{{ gender }}</option>
-            }
-          </select>
+        <label for="gender"><strong>Gender</strong></label>
+        <select
+          name="gender"
+          id="gender"
+          [(ngModel)]="selectedCharacterGender"
+          #gender="ngModel">
+          @for (gender of genders; track gender) {
+            <option value="{{ gender }}">{{ gender }}</option>
+          }
+        </select>
 
-          <label for="class"><strong>Class</strong></label>
-          <select
-            name="class"
-            id="class"
-            [(ngModel)]="selectedCharacterClass"
-            #class="ngModel">
-            @for (class of classes; track class) {
-              <option value="{{ class }}">{{ class }}</option>
-            }
-          </select>
+        <label for="class"><strong>Class</strong></label>
+        <select
+          name="class"
+          id="class"
+          [(ngModel)]="selectedCharacterClass"
+          #class="ngModel">
+          @for (class of classes; track class) {
+            <option value="{{ class }}">{{ class }}</option>
+          }
+        </select>
 
-          <input
-            type="submit"
-            value="Create Character"
-            [disabled]="!createCharacterForm.valid"/>
-        </fieldset>
+        <input
+          type="submit"
+          value="Create Character"
+          [disabled]="!createCharacterForm.valid"/>
       </form>
 
       <div class="created-characters-summary">
@@ -96,23 +94,22 @@ import { CommonModule } from '@angular/common';
       justify-content: space-between;
       gap: 10px;
       padding: 0 50px;
+      margin: 20px;
     }
 
     .create-character-form {
       flex: 1;
-      margin-right: 20px;
+      margin: 20px;
+      padding: 50px;
+      height: 340px;
+      box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.2);
     }
 
     .created-characters-summary {
       flex: 1;
-    }
-
-    fieldset {
-      margin-bottom: 20px;
-    }
-
-    legend {
-      font-size: 18px;
+      margin: 20px;
+      padding: 50px;
+      box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.2);
     }
 
     label {
@@ -154,6 +151,13 @@ import { CommonModule } from '@angular/common';
 
     input[type="submit"] {
       float: right;
+      background-color: #1F6DAD;
+      color: white;
+      padding: 14px 20px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      font-size: 15px;
     }
 
     .created-characters-summary li {

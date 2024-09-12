@@ -73,25 +73,35 @@ body {
 }
 
 .navbar .menu-right {
+  display: flex;
   list-style: none;
+}
+
+.navbar .menu-right button {
   background: #fff;
+  color: #1F6DAD;
   padding: 10px 15px;
   border-radius: 25px;
   border: none;
-}
-
-.navbar .menu-right a {
-  color: #1F6DAD;
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-style: normal;
   font-size: 17px;
-  text-decoration: none;
 }
 
-.navbar .menu-right:hover {
-  background-color: #ffffffa6;
-  cursor: pointer;
+.navbar .menu-right p {
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 15px;
+  margin: 12px 10px 0 0;
+  padding: 0;
+}
+
+.navbar .menu-right a {
+  color: #1F6DAD;
+  text-decoration: none;
 }
 
 h1 {

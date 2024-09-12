@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +21,15 @@ import { RouterLink, RouterOutlet } from '@angular/router';
           <li><a routerLink="/create-guild">Create Guild</a></li>
           <li><a routerLink="/character-faction">Character Faction</a></li>
         </ul>
-        <button class="menu-right"><a routerLink="/signin">Sign In</a></button>
+
+        <div class="menu-right">
+          @if (email) {
+            <p>Welcome <strong>{{ email }}</strong></p>
+            <button (click)="signout()">Sign Out</button>
+          } @else {
+            <button><a routerLink="/signin">Sign In</a></button>
+          }
+        </div>
       </nav>
 
       <main class="main-content">
@@ -46,5 +56,32 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   ]
 })
 export class AppComponent {
-  title = 'rpg-character-builder';
+  email?: string;
+
+  constructor(
+    private authService: AuthService,
+    private cookieService: CookieService
+  ) {
+  }
+
+  ngOnInit() {
+    // Subscribe to the getAuthState() method in the AuthService to
+    // determine if the user is signed in or not.
+    this.authService.getAuthState().subscribe((isAuth) => {
+      // Check if the user is authenticated
+      if (isAuth) {
+        // Get the user's email from browser cookies.
+        this.email = this.cookieService.get('session_user');
+      }
+    });
+  }
+
+  /**
+   * Method used to call the signout() method from the AuthService to
+   * sign users out of the application.
+   */
+  signout() {
+    this.email = "";
+    this.authService.signout();
+  }
 }
