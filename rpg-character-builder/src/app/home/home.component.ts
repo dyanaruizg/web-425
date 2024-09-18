@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   template: `
-    <div>
+    <div class="home-container">
       <img class="banner" src="/assets/Horizon.png"
         alt="participate, customize characters, and narrate interactively">
       <h1 class="slogan">Quick and easy RPG character builder!</h1>
@@ -64,67 +64,71 @@ import { Component } from '@angular/core';
       </div>
     </div>
   `,
-    styles: [
-      `
-      .slogan {
-        font-size: 40px;
-      }
+  styles: `
+    .home-container {
+      text-align: center;
+      margin-bottom: 50px;
+    }
 
-      .description {
-        font-size: 25px;
-        padding: 0 50px;
-      }
+    .slogan {
+      font-size: 40px;
+    }
 
-      .banner {
-        width: 100%;
-      }
+    .description {
+      font-size: 25px;
+      padding: 0 50px;
+    }
 
-      .section-title {
-        font-size: 30px;
-      }
+    .banner {
+      width: 100%;
+    }
 
-      .section-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        gap: 20px;
-      }
+    .section-title {
+      font-size: 30px;
+    }
 
-      .card img {
-        max-width: 100%;
-        height: auto;
-        object-fit: cover;
-      }
+    .section-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
 
-      .card p {
-        margin-top: 10px;
-      }
+    .card img {
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
 
-      .card {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        max-width: 300px;
-        margin: auto;
-        text-align: center;
-      }
+    .card p {
+      margin-top: 10px;
+    }
 
-      .card p {
-        padding: 5px;
-      }
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      max-width: 300px;
+      margin: auto;
+      text-align: center;
+      background-color: #fff;
+    }
 
-      .card button {
-        border: none;
-        outline: 0;
-        padding: 12px;
-        color: white;
-        background-color: #000;
-        text-align: center;
-        cursor: pointer;
-        width: 100%;
-        font-size: 18px;
-      }
-      `
-    ]
+    .card p {
+      padding: 5px;
+    }
+
+    .card button {
+      border: none;
+      outline: 0;
+      padding: 12px;
+      color: white;
+      background-color: #000;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+      font-size: 18px;
+    }
+  `
 })
 export class HomeComponent {
 

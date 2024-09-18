@@ -47,15 +47,17 @@ import { NgAlertBoxComponent } from "ng-alert-box-popup";
   `,
   styles: `
     .signin-form-container {
-      display: inline-block;
-      flex-wrap: wrap;
-      list-style-type: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
     }
 
     .signin-form {
       width: 300px;
       padding: 50px 100px;
       margin: 50px;
+      background-color: #fff;
       box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.2);
     }
 

@@ -43,10 +43,12 @@ import { Component } from '@angular/core';
   styles: [`
     .title {
       font-size: 30px;
+      text-align: center;
     }
 
     .description {
       font-size: 25px;
+      text-align: center;
     }
 
     .players-container {
@@ -54,6 +56,7 @@ import { Component } from '@angular/core';
       flex-wrap: wrap;
       list-style-type: none;
       padding: 20px;
+      text-align: center;
     }
 
     .player-character img {
@@ -63,6 +66,7 @@ import { Component } from '@angular/core';
     .player-character {
       flex: 0 1 calc(33.33% - 20px);
       margin: 10px;
+      background-color: #fff;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     }
 
@@ -73,8 +77,7 @@ import { Component } from '@angular/core';
     .card {
       padding: 0 20px 20px 20px;
     }
-    `
-  ]
+  `]
 })
 export class PlayersComponent {
   players: PlayerCharacter[];

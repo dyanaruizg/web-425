@@ -88,13 +88,12 @@ import { CommonModule } from '@angular/common';
       </div>
     </div>
   `,
-  styles: [`
+  styles: `
     .create-character-form-container {
       display: flex;
       justify-content: space-between;
-      gap: 10px;
-      padding: 0 50px;
-      margin: 20px;
+      text-align: center;
+      background-color: #ededed;
     }
 
     .create-character-form {
@@ -102,18 +101,24 @@ import { CommonModule } from '@angular/common';
       margin: 20px;
       padding: 50px;
       height: 340px;
-      box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.2);
+      background-color: #fff;
+      box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.2);
     }
 
     .created-characters-summary {
       flex: 1;
       margin: 20px;
       padding: 50px;
-      box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.2);
+      background-color: #fff;
+      box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.2);
     }
 
     label {
       text-align: left;
+    }
+
+    h1 {
+      margin: 0 auto;
     }
 
     .alert {
@@ -152,6 +157,7 @@ import { CommonModule } from '@angular/common';
     input[type="submit"] {
       float: right;
       background-color: #1F6DAD;
+      margin-top: 20px;
       color: white;
       padding: 14px 20px;
       border: none;
@@ -165,7 +171,11 @@ import { CommonModule } from '@angular/common';
       padding: 5px;
       list-style-type: none;
     }
-  `]
+
+    input[type="submit"]:disabled {
+      background-color: #175282;
+    }
+  `
 })
 export class CreateCharacterComponent {
 
