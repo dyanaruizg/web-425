@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -8,11 +8,12 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 import { NgAlertBoxComponent } from "ng-alert-box-popup";
+import { GuildListComponent } from '../guild-list/guild-list.component';
 
 @Component({
   selector: 'app-create-guild',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, GuildListComponent],
   template: `
     <div class="guild-form-container">
       <form [formGroup]="guildForm" class="guild-form"
@@ -67,27 +68,9 @@ import { NgAlertBoxComponent } from "ng-alert-box-popup";
         <input type="submit" [disabled]="!guildForm.valid" value="Create Guild">
       </form>
 
-      <div class="guild">
-        <h1>Created Guilds Summary</h1>
-        <div class="guild-container">
-          @for(guild of preexistingGuild; track guild) {
-            <div class="guild-card">
-              <h2>{{ guild.guildName }}</h2>
-              <h3><strong>Description:</strong></h3>
-              <p>{{ guild.description }}</p>
-              <h3><strong>Type:</strong></h3>
-              <p>{{ guild.type }}</p>
-              <h3><strong>Accept Terms:</strong></h3>
-              <ul class="terms-list">
-                @for(term of guild.acceptTerms; track term) {
-                  <li>{{ term }}</li>
-                }
-              </ul>
-              <h3><strong>Notification Preference:</strong></h3>
-              <p>{{ guild.notificationPreference }}</p>
-            </div>
-          }
-        </div>
+      <div class="guild-list">
+        <app-guild-list [preexistingGuild]="preexistingGuild">
+        </app-guild-list>
       </div>
     </div>
   `,
@@ -108,40 +91,10 @@ import { NgAlertBoxComponent } from "ng-alert-box-popup";
       box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.2);
     }
 
-    .guild {
+    .guild-list {
       margin: 20px;
       padding: 50px;
       width: 80%;
-    }
-
-    .guild-container {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin-top: 20px;
-      gap: 20px;
-    }
-
-    .guild-card {
-      flex: 0 0 calc(50% - 20px);
-      box-sizing: border-box;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      padding: 20px;
-      margin: 10px 0;
-      text-align: center;
-      background-color: #fff;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    }
-
-    .terms-list {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    .terms-list li {
-      padding: 5px 0;
     }
 
     .name-input {
@@ -231,6 +184,8 @@ export class CreateGuildComponent {
   notificationPreference: string[] = ['Email', 'SMS', 'In-App'];
   preexistingGuild: any;
 
+  @Output() guildsUpdated = new EventEmitter<any>();
+
   // Build a guild form with 5 controls and include data validation
   // through the Validators module.
   guildForm: FormGroup = this.fb.group({
@@ -310,6 +265,7 @@ export class CreateGuildComponent {
 
     // Add the object to the preexistingGuild array.
     this.preexistingGuild.push(newGuild);
+    this.guildsUpdated.emit(this.preexistingGuild);
     this.alerts.dialog('S','Guild submitted successfully!');
   }
 }

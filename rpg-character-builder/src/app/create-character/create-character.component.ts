@@ -5,14 +5,17 @@ export interface Character {
   class: string;
 }
 
-import { Component, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import {
+  CharacterListComponent
+} from '../character-list/character-list.component';
 
 @Component({
   selector: 'app-create-character',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, CharacterListComponent],
   template: `
     <div class="create-character-form-container">
       <form
@@ -67,24 +70,9 @@ import { CommonModule } from '@angular/common';
           [disabled]="!createCharacterForm.valid"/>
       </form>
 
-      <div class="created-characters-summary">
-        <h1>Created Characters Summary</h1>
-
-        @if (characters.length > 0) {
-          <ul>
-            @for (character of characters; track character) {
-              <li>
-                <strong>{{ character.name }}</strong>
-                <br />
-                Gender: {{ character.gender }}
-                <br />
-                Class: {{ character.class }}
-              </li>
-            }
-          </ul>
-        } @else {
-          <p>No characters have been created yet.</p>
-        }
+      <div class="created-characters-list">
+        <app-character-list [characters]="characters">
+        </app-character-list>
       </div>
     </div>
   `,
@@ -105,7 +93,7 @@ import { CommonModule } from '@angular/common';
       box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.2);
     }
 
-    .created-characters-summary {
+    .created-characters-list {
       flex: 1;
       margin: 20px;
       padding: 50px;
@@ -166,19 +154,12 @@ import { CommonModule } from '@angular/common';
       font-size: 15px;
     }
 
-    .created-characters-summary li {
-      margin-bottom: 10px;
-      padding: 5px;
-      list-style-type: none;
-    }
-
     input[type="submit"]:disabled {
       background-color: #175282;
     }
   `
 })
 export class CreateCharacterComponent {
-
   // Declare the global variables
   characters: Character[]; // Array to store the created characters
   characterId: number; // Character ID
@@ -188,6 +169,8 @@ export class CreateCharacterComponent {
 
   // Variable that access the form
   @ViewChild('createCharacterForm') characterForm!: NgForm;
+
+  @Output() charactersUpdated = new EventEmitter<Character[]>();
 
   // Arrays containing different options for the select menus
   genders = ["Male", "Female", "Other"];
@@ -217,6 +200,8 @@ export class CreateCharacterComponent {
 
     // Add character to the characters array
     this.characters.push(characterToCreate);
+
+    this.charactersUpdated.emit(this.characters);
 
     // Reset form values
     this.resetForm();
