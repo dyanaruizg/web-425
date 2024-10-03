@@ -44,8 +44,6 @@ export class DailySpecialsComponent {
 
   constructor(private http: HttpClient) {
     this.dayOfTheWeek = this.getDayOfTheWeek();
-    console.log(this.dayOfTheWeek);
-    console.log(`http://localhost:3000/api/daily-specials?day=${this.dayOfTheWeek}`);
 
     this.http.get(`http://localhost:3000/api/daily-specials?day=${this.dayOfTheWeek}`).subscribe({
       next: (res) => {
